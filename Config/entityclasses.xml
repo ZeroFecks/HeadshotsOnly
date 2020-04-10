@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
+	<!--
+		To get Vultures off the list, we need to add a new tag (hs) to each zombie
+			that will be set as headshot only
+	-->
+	<!-- Append the 'hs' tag to all non-vulture zombies -->
+	<append xpath="/entity_classes/entity_class[contains(@name, 'zombie') and not(contains(@name, 'vulture'))]/property[@name='Tags']/@value">,hs</append>
+	<!-- Now we'll append a new effect group to playerMale -->
 	<append xpath="/entity_classes/entity_class[@name='playerMale']">
 		<effect_group>
-			<requirement name="EntityTagCompare" target="other" tags="zombie" />
+			<!-- Check each target for the 'hs' tag -->
+			<requirement name="EntityTagCompare" target="other" tags="hs" />
+				<!-- Remove base damage for body shots -->
 				<passive_effect name="DamageModifier" operation="base_subtract" value="9999" tags="lowerbody,upperbody" />
-				<passive_effect name="DamageModifier" operation="perc_add" value="2.5" tags="head" />
-				<passive_effect name="DismemberChance" operation="base_set" value="50" />
+				<!-- Boost the damage percentage for headshots -->
+				<passive_effect name="DamageModifier" operation="perc_add" value="1.5" tags="head" />
+				<!-- Grant a significant boost to dismember base chance -->
+				<passive_effect name="DismemberChance" operation="base_set" value="30" />
 		</effect_group>
 	</append>
-
-	<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombie') or starts-with(@name, 'legendaryZombie')]/property[@name='DismemberMultiplierHead']/@value">.4</set>
+	<!--
+		Since we removed damage to body shots,
+		let's boost the multiplier for dismemberments.
+		This should equalize out some of the difficulty
+	-->
+	<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombie') or starts-with(@name, 'legendaryZombie')]/property[@name='DismemberMultiplierHead']/@value">.3</set>
 	<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombie') or starts-with(@name, 'legendaryZombie')]/property[@name='DismemberMultiplierArms']/@value">.25</set>
 	<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombie') or starts-with(@name, 'legendaryZombie')]/property[@name='DismemberMultiplierLegs']/@value">.25</set>
 </configs>
