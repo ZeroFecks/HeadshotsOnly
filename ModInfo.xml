@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <ModInfo>
+      <Name value="Headshots Only"/>
+      <Description value="Headshot damage only"/>
+      <Author value="ZeroFecks"/>
+      <Version value="1.0"/>
+      <Website value="https://github.com/ZeroFecks/HeadshotsOnly"/>
+    </ModInfo>
+</xml>

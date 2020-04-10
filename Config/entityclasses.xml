@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<append xpath="/entity_classes/entity_class[@name='playerMale']">
+		<effect_group>
+			<requirement name="EntityTagCompare" target="other" tags="zombie" />
+				<passive_effect name="DamageModifier" operation="base_subtract" value="9999" tags="lowerbody,upperbody" />
+				<passive_effect name="DamageModifier" operation="perc_add" value="2.5" tags="head" />
+				<passive_effect name="DismemberChance" operation="base_set" value="50" />
+		</effect_group>
+	</append>
+
+	<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombie') or starts-with(@name, 'legendaryZombie')]/property[@name='DismemberMultiplierHead']/@value">.4</set>
+	<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombie') or starts-with(@name, 'legendaryZombie')]/property[@name='DismemberMultiplierArms']/@value">.25</set>
+	<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombie') or starts-with(@name, 'legendaryZombie')]/property[@name='DismemberMultiplierLegs']/@value">.25</set>
+</configs>
